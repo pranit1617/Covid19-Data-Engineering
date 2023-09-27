@@ -1,0 +1,24 @@
+CREATE EXTERNAL TABLE IF NOT EXISTS covid_19_india_db.district_wise_daily_etl (
+  `unnamed` int,
+  `date` date,
+  `State` string,
+  `District` string,
+  `Confirmed` int,
+  `Recovered` int,
+  `Deceased` int,
+  `Active` int,
+  `Other` int,
+  `Tested` float,
+  `City_new` string,
+  `City_needed` string,
+  `Confirmed_daily` float,
+  `Recovered_daily` float,
+  `Deceased_daily` float,
+  `90_day_tagging` float
+)
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe'
+WITH SERDEPROPERTIES (
+  'serialization.format' = ',',
+  'field.delim' = ','
+) LOCATION 's3://nyl-processed-data/covid19indiaprocessed/csv/district_wise_daily_etl/'
+TBLPROPERTIES ("skip.header.line.count"="1");

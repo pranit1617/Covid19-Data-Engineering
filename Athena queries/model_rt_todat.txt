@@ -1,0 +1,16 @@
+CREATE EXTERNAL TABLE IF NOT EXISTS covid_19_india_db.model_rt_today (
+  `unnamed` int,
+  `region` string,
+  `rt` float,
+  `rt_week` float,
+  `rt_max` float,
+  `totalconfirmed` float,
+  `totalconfirmed_log` float,
+  `trend` string
+)
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe'
+WITH SERDEPROPERTIES (
+  'serialization.format' = ',',
+  'field.delim' = ','
+) LOCATION 's3://nyl-processed-data/covid19indiaprocessed/csv/model_data_today/'
+TBLPROPERTIES ("skip.header.line.count"="1");

@@ -1,0 +1,14 @@
+CREATE EXTERNAL TABLE IF NOT EXISTS covid_19_india_db.district_wise_daily_KPI (
+  `unnamed` int,
+  `City_new` string,
+  `City_needed` string,
+  `date` date,
+  `variable` string,
+  `value` int 
+)
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe'
+WITH SERDEPROPERTIES (
+  'serialization.format' = ',',
+  'field.delim' = ','
+) LOCATION 's3://nyl-processed-data/covid19indiaprocessed/csv/district_wise_daily_kpi/'
+TBLPROPERTIES ("skip.header.line.count"="1");

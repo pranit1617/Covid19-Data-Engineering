@@ -1,0 +1,45 @@
+CREATE EXTERNAL TABLE IF NOT EXISTS covid_19_india_db.combined_model_data (
+  `unnamed` int,
+  `key` string,
+  `region` string,
+  `date` date,
+  `city_new` string,
+  `doubling_time` float,
+  `rt_mean_x` float,
+  `rt_lower_x` float,
+  `rt_upper_x` float,
+  `rt_mean_y` float,
+  `rt_lower_y` float,
+  `rt_upper_y` float,
+  `dailyconfirmed_mean` float,
+  `dailyconfirmed_lower` float,
+  `dailyconfirmed_upper` float,
+  `totalconfirmed_lower` float,
+  `totalconfirmed_mean` float,
+  `totalconfirmed_upper` float,
+  `active_lower` float,
+  `active_mean` float,
+  `active_upper` float,
+  `recovered_lower` float,
+  `recovered_mean` float,
+  `recovered_upper` float,
+  `death_lower` float,
+  `death_mean` float,
+  `death_upper` float,
+  `totalconfirmed` float,
+  `active` float, 
+  `totalrecovered` float, 
+  `totaldeceased` float,
+  `dailyconfirmed` float,
+  `dailyrecovered` float,
+  `dailydeceased` float,
+  `active_log` float,
+  `totalconfirmed_log` float,
+  `90_day_tagging_actual_and_prediction` float 
+)
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe'
+WITH SERDEPROPERTIES (
+  'serialization.format' = ',',
+  'field.delim' = ','
+) LOCATION 's3://nyl-processed-data/covid19indiaprocessed/csv/combined_model_data'
+TBLPROPERTIES ("skip.header.line.count"="1");
